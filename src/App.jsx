@@ -1,18 +1,9 @@
 import './App.css'
-import Home from './components/Home'
-import Header from './components/Header'
+import Home from './components/Home/Home'
+
 
 function App() {
-
-  return (
-    <>
-      <Header />
-      <div>
-        Hello World!
-        <Home />
-      </div>
-    </>
-  )
+  return <Home />
 }
 
 export default App

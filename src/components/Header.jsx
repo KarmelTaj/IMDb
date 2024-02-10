@@ -72,8 +72,8 @@ const Header = () => {
 
     return (
         <ThemeProvider theme={theme}>
-            <Box sx={{ flexGrow: 1 }}>
-                <AppBar position="static" sx={{ py: 1.5 }}>
+            <Box sx={{ flexGrow: 1, height:'10vh' }}>
+                <AppBar position="relative" sx={{ py: 3.5 }}>
                     <Toolbar variant='dense' sx={{ p: 0 }}>
                         <Typography variant="h6" component="div" sx={{ fontWeight: 800, bgcolor: 'secondary.main', color: 'secondary.contrastText', borderRadius: '4px', px: 0.5 }}>
                             IMDb
