@@ -5,7 +5,6 @@ import MovieDetails from "./MovieDetails/MovieDetails";
 const Home = () => {
     return <>
         <Header />
-        <MovieDetails />
         <MainHome />
     </>
 }

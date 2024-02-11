@@ -1,23 +1,24 @@
 import React from "react";
 import './MovieDetails.css'
 
-const MovieDetails = () => {
+const MovieDetails = ({ movie }) => {
     return <>
         <div className="movie_card" id="bright">
             <div className="info_section">
                 <div className="movie_header">
-                    <img className="locandina" src="https://movieplayer.net-cdn.it/t/images/2017/12/20/bright_jpg_191x283_crop_q85.jpg" />
-                    <h1>Title</h1>
-                    <h4>Year, Director</h4>
-                    <span className="minutes">Duration(Min)</span>
+                    <img className="locandina" src={`${movie.postImg}`} alt={movie.title} />
+                    <h1>{movie.title}</h1>
+                    <h4>{movie.year}, {movie.director}</h4>
+                    <span className="minutes">{movie.duration}</span>
                 </div>
                 <div className="movie_desc">
                     <p className="text">
-                        Description
+                        {movie.description}
                     </p>
                 </div>
             </div>
-            <div className="blur_back bright_back"></div>
+
+            <div className="blur_back" style={{backgroundImage: `url(${movie.backdropImg})`}}></div>
         </div>
     </>
 }
