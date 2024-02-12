@@ -13,7 +13,7 @@ const MovieDetails = ({ movie }) => {
                     <h4>{movie.year}, {movie.director}</h4>
                     <span className="minutes">{movie.duration}</span>
                     <Box sx={{display: 'flex', flexDirection: 'row'}}>
-                        <Rating name="read-only" value={movie.rate} precision={0.1} readOnly sx={{ display: 'flex', py: 1.5 }} />
+                        <Rating name="read-only" value={movie.rate} precision={0.1} size="large" readOnly sx={{ display: 'flex', py: 1.5 }} />
                         <span className="rating"> {movie.rate} / 5 </span>
                     </Box>
 
