@@ -64,6 +64,11 @@
                 height: 120px;
                 box-shadow: 0 0 20px -10px rgba(0, 0, 0, 0.5);
             }
+            .rating{
+                color: #fff;
+                padding: 10px 8px;
+                font-weight: 500;
+            }
         }
 
         .movie_desc {
