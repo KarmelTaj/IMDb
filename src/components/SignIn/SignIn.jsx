@@ -11,7 +11,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider, styled } from '@mui/material/styles';
 
-const BlurredBackground = styled('div')(({ theme }) => ({
+const DarkendBackground = styled('div')(({ theme }) => ({
   position: 'absolute',
   top: 0,
   left: 0,
@@ -20,7 +20,6 @@ const BlurredBackground = styled('div')(({ theme }) => ({
   background: `url(https://cdn.wallpapersafari.com/19/16/zhUgwH.jpg)`,
   backgroundRepeat: 'no-repeat',
   backgroundSize: 'cover',
-  // filter: 'blur(8px)',
   filter: 'brightness(40%)',
   backgroundPosition: '50% 50%',
   zIndex: -1,
@@ -29,17 +28,17 @@ const BlurredBackground = styled('div')(({ theme }) => ({
 const theme = createTheme({
   palette: {
     primary: {
-        main: '#121212',
-        contrastText: '#fff', 
+      main: '#121212',
+      contrastText: '#fff',
     },
     secondary: {
-        main: '#f5c518',
-        contrastText: '#000',
+      main: '#f5c518',
+      contrastText: '#000',
     },
-},
+  },
 });
 
-export default function SignInSide() {
+const SignIn = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -60,7 +59,7 @@ export default function SignInSide() {
         }}
       >
         <CssBaseline />
-        <BlurredBackground />
+        <DarkendBackground />
         <Grid container component="main" sx={{ height: '100%', justifyContent: 'center' }}>
           <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square sx={{ borderRadius: '12px' }}>
             <Box
@@ -73,7 +72,7 @@ export default function SignInSide() {
               }}
             >
               <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-                <LockOutlinedIcon color='primary'/>
+                <LockOutlinedIcon color='primary' />
               </Avatar>
               <Typography component="h1" variant="h5">
                 Sign in
@@ -107,10 +106,13 @@ export default function SignInSide() {
                 >
                   Sign In
                 </Button>
-                <Grid container>
-                  <Grid item>
+                <Grid container >
+                  <Grid item display='flex' justifyContent='space-between' sx={{ width: '100%' }} >
                     <Link href="/sign-up" variant="body2">
                       {"Don't have an account? Sign Up"}
+                    </Link>
+                    <Link href="/" variant="body2" underline="none">
+                      {"Home"}
                     </Link>
                   </Grid>
                 </Grid>
@@ -122,3 +124,5 @@ export default function SignInSide() {
     </ThemeProvider>
   );
 }
+
+export default SignIn;
