@@ -8,7 +8,7 @@ const MovieDetails = ({ movie }) => {
         <Box className="movie_card" id="bright">
             <div className="info_section">
                 <div className="movie_header">
-                    <img className="locandina" src={`${movie.postImg}`} alt={movie.title} />
+                    <img className="locandina" src={`${movie.posterurl}`} alt={movie.title} />
                     <h1>{movie.title}</h1>
                     <h4>{movie.year}, {movie.director}</h4>
                     <span className="minutes">{movie.duration}</span>
@@ -25,7 +25,7 @@ const MovieDetails = ({ movie }) => {
                 </div>
             </div>
 
-            <div className="blur_back" style={{ backgroundImage: `url(${movie.backdropImg})` }}></div>
+            <div className="blur_back" style={{ backgroundImage: `url(${movie.backdropurl})` }}></div>
         </Box>
     </>
 }
