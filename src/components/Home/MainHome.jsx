@@ -16,7 +16,7 @@ const theme = createTheme({
 const MainHome = () => {
     return <>
         <ThemeProvider theme={theme}>
-            <Box sx={{ bgcolor: '#000' }}>
+            <Box sx={{ bgcolor: '#000', pt: 10, height: '100vh' }}>
                 <Typography variant="h4" align="center" color={'primary.main'} sx={{ pt: 10, fontWeight: 600 }}>Explore Movies & TV shows</Typography>
                 <MovieList />
             </Box>

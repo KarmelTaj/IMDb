@@ -2,10 +2,10 @@ import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider, styled, alpha } from '@mui/material/styles';
 import SearchIcon from '@mui/icons-material/Search';
 import InputBase from '@mui/material/InputBase';
+import Link from '@mui/material/Link';
 
 const theme = createTheme({
     spacing: 8,
@@ -72,15 +72,15 @@ const Header = () => {
 
     return (
         <ThemeProvider theme={theme}>
-            <Box sx={{ flexGrow: 1, height:'10vh' }}>
+            <Box sx={{ flexGrow: 1, height: '10vh', width: '100%', position: 'absolute', top: 0 }}>
                 <AppBar position="relative" sx={{ py: 3.5 }}>
                     <Toolbar variant='dense' sx={{ p: 0 }}>
-                        <Typography variant="h6" component="div" sx={{ fontWeight: 800, bgcolor: 'secondary.main', color: 'secondary.contrastText', borderRadius: '4px', px: 0.5 }}>
-                            IMDb
-                        </Typography>
+                        <Link href="/" variant="h5" underline="none" sx={{ fontWeight: 800, bgcolor: 'secondary.main', color: 'secondary.contrastText', borderRadius: '4px', px: 0.6, py: 0.2 }}>
+                            {"IMDb"}
+                        </Link>
                         <Search>
                             <SearchIconWrapper>
-                                <SearchIcon sx={{color: '#868686'}}/>
+                                <SearchIcon sx={{ color: '#868686' }} />
                             </SearchIconWrapper>
                             <StyledInputBase
                                 placeholder="Search…"
