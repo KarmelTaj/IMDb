@@ -14,14 +14,14 @@ const theme = createTheme({
 });
 
 const MainHome = () => {
-    return <>
+    return (
         <ThemeProvider theme={theme}>
-            <Box sx={{ bgcolor: '#000', pt: 10, height: '100vh' }}>
+            <Box sx={{ bgcolor: '#000', pt: 10, height: '100vh', overflow: 'auto' }}>
                 <Typography variant="h4" align="center" color={'primary.main'} sx={{ pt: 10, fontWeight: 600 }}>Explore Movies & TV shows</Typography>
-                <MovieList />
+                <MovieList sx={{ height: 'calc(100% - 64px)' /* Adjust as needed based on your design */ }} />
             </Box>
-        </ThemeProvider >
-    </>
+        </ThemeProvider>
+    );
 }
 
 export default MainHome;

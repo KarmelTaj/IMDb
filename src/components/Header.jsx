@@ -73,7 +73,7 @@ const Header = () => {
     return (
         <ThemeProvider theme={theme}>
             <Box sx={{ flexGrow: 1, height: '10vh', width: '100%', position: 'absolute', top: 0 }}>
-                <AppBar position="relative" sx={{ py: 3.5 }}>
+                <AppBar position="sticky" sx={{ py: 3.5 }}>
                     <Toolbar variant='dense' sx={{ p: 0 }}>
                         <Link href="/" variant="h5" underline="none" sx={{ fontWeight: 800, bgcolor: 'secondary.main', color: 'secondary.contrastText', borderRadius: '4px', px: 0.6, py: 0.2 }}>
                             {"IMDb"}
