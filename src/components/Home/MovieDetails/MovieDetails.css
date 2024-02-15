@@ -8,6 +8,9 @@
     font-weight: 400;
 }
 
+a {
+    text-decoration: none;
+}
 .movie_card {
     position: relative;
     display: block;
