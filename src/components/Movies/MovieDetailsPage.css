@@ -1,0 +1,213 @@
+@import url(https://fonts.googleapis.com/css?family=Lato:400,300,700);
+
+@import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+}
+
+body {
+    background: linear-gradient(199deg, rgba(6, 47, 39, 1) 12%, rgba(0, 0, 0, 1) 31%, rgba(10, 57, 48, 1) 52%, rgba(6, 47, 39, 1) 68%, rgba(4, 32, 27, 1) 85%, rgba(6, 47, 39, 1) 100%);
+}
+
+
+.movie-card {
+    font: 14px/22px "Lato", Arial, sans-serif;
+    color: #A9A8A3;
+    padding: 40px 0;
+    height: 100vh;
+}
+
+.container {
+    margin: 0 auto;
+    width: 780px;
+    height: 100%;
+    background: #000;
+    border-radius: 32px;
+    position: relative;
+}
+
+.hero {
+    height: 45%;
+    margin: 0;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+
+}
+
+.background-poster {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    overflow: hidden;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    transform: skewY(-2.2deg);
+    transform-origin: 0 0;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.background-poster::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: inherit;
+    filter: blur(3px);
+}
+
+.cover {
+    position: absolute;
+    top: 20%;
+    left: 40px;
+    z-index: 2;
+    max-width: 200px;
+    max-height: 290px;
+}
+
+
+
+.details {
+
+    padding: 190px 0 0 280px;
+    transform: skewY(2.2deg);
+
+    .title {
+        color: white;
+        font-size: 44px;
+        font-weight: 700;
+        margin-bottom: 13px;
+        position: relative;
+
+    }
+
+    .minutes {
+        display: inline-block;
+        margin: 10px;
+        border-radius: 5px;
+        border: 1px solid rgba(255, 255, 255, 0.13);
+        align-self: center;
+        padding: 5px;
+        background: #f5c518;
+        color: #544C21;
+        font-weight: 600;
+        font-size: 16px;
+        position: relative;
+        z-index: 4;
+    }
+
+    .mpa {
+        display: inline-block;
+        margin: 10px;
+        border-radius: 5px;
+        align-self: center;
+        background: #f5c518;
+        color: #544C21;
+        font-size: 16px;
+        font-weight: 600;
+        padding: 5px;
+        position: relative;
+        z-index: 4;
+    }
+
+}
+
+.rating {
+    color: #fff;
+    padding: 10px 8px;
+    font-weight: 600;
+    font-size: 12px;
+    align-self: center;
+}
+
+.descriptions {
+
+    bottom: 0px;
+    height: 200px;
+    font-size: 16px;
+    line-height: 26px;
+    color: #B1B0AC;
+
+}
+
+.tags {
+    padding-left: 50px;
+    padding-top: 120px;
+    width: 220px;
+    float: left;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.tag {
+    background: white;
+    color: #000;
+    border-radius: 12px;
+    padding: 0px 8px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 36px;
+    cursor: pointer;
+    width: 60%;
+}
+
+.tag:hover {
+    background: #f5c518;
+    color: #544C21;
+}
+
+.actors {
+    padding-left: 41px;
+    padding-top: 30px;
+    margin-left: 20px;
+    width: 480px;
+    float: left;
+}
+
+.avatars {
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    margin-top: 23px;
+    bottom: 10%;
+
+    .tooltip {
+        position: relative;
+        display: inline-block;
+    }
+
+    .tooltip .tooltiptext {
+        visibility: hidden;
+        width: 120px;
+        background-color: #f5c518;
+        color: #544C21;
+        text-align: center;
+        border-radius: 6px;
+        padding: 5px 0;
+
+        /* Position the tooltip */
+        position: absolute;
+        z-index: 1;
+    }
+
+    .tooltip:hover .tooltiptext {
+        visibility: visible;
+    }
+
+    .avatar {
+        width: 90px
+    }
+}
