@@ -97,7 +97,7 @@ body {
         border-radius: 5px;
         border: 1px solid rgba(255, 255, 255, 0.13);
         align-self: center;
-        padding: 5px;
+        padding: 5px 6px;
         background: #f5c518;
         color: #544C21;
         font-weight: 600;
@@ -115,7 +115,7 @@ body {
         color: #544C21;
         font-size: 16px;
         font-weight: 600;
-        padding: 5px;
+        padding: 5px 16px;
         position: relative;
         z-index: 4;
     }
@@ -184,6 +184,10 @@ body {
     margin-top: 23px;
     bottom: 10%;
 
+    img {
+        object-fit: contain;
+    }
+
     .tooltip {
         position: relative;
         display: inline-block;
@@ -191,12 +195,17 @@ body {
 
     .tooltip .tooltiptext {
         visibility: hidden;
-        width: 120px;
+        width: 150px;
         background-color: #f5c518;
         color: #544C21;
         text-align: center;
         border-radius: 6px;
         padding: 5px 0;
+        bottom: 120%;
+        /* Adjust the tooltip position */
+        left: 50%;
+        transform: translateX(-50%);
+        white-space: nowrap;
 
         /* Position the tooltip */
         position: absolute;
@@ -208,6 +217,9 @@ body {
     }
 
     .avatar {
-        width: 90px
+        width: 90px;
+        height: 90px;
+        border-radius: 50%;
+        /* Make the avatar circular */
     }
 }
