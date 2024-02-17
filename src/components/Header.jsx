@@ -6,6 +6,10 @@ import { createTheme, ThemeProvider, styled, alpha } from '@mui/material/styles'
 import SearchIcon from '@mui/icons-material/Search';
 import InputBase from '@mui/material/InputBase';
 import Link from '@mui/material/Link';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import IconButton from '@mui/material/IconButton';
+import Tooltip from '@mui/material/Tooltip';
+import { Zoom } from '@mui/material';
 
 const theme = createTheme({
     spacing: 8,
@@ -74,7 +78,7 @@ const Header = () => {
         <ThemeProvider theme={theme}>
             <Box sx={{ flexGrow: 1, height: '10vh', width: '100%', position: 'absolute', top: 0 }}>
                 <AppBar position="sticky" sx={{ py: 3.5 }}>
-                    <Toolbar variant='dense' sx={{ p: 0 }}>
+                    <Toolbar variant='dense' sx={{ p: 0, position: 'relative' }}>
                         <Link href="/" variant="h5" underline="none" sx={{ fontWeight: 800, bgcolor: 'secondary.main', color: 'secondary.contrastText', borderRadius: '4px', px: 0.6, py: 0.2 }}>
                             {"IMDb"}
                         </Link>
@@ -87,6 +91,13 @@ const Header = () => {
                                 inputProps={{ 'aria-label': 'search' }}
                             />
                         </Search>
+                        <Link href="/login" sx={{ position: 'absolute', right: '8px' }}>
+                            <Tooltip TransitionComponent={Zoom} title="Go to your account">
+                                <IconButton aria-label="login" size="large" color="secondary">
+                                    <AccountCircleIcon sx={{ width: "2em", height: "2em" }} />
+                                </IconButton>
+                            </Tooltip>
+                        </Link>
                     </Toolbar>
                 </AppBar>
             </Box>
