@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useState, useEffect } from "react";
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -10,6 +11,8 @@ import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider, styled } from '@mui/material/styles';
+import { post } from '../../utils/httpClient'
+import { useNavigate } from 'react-router-dom';
 
 const DarkendBackground = styled('div')(({ theme }) => ({
   position: 'absolute',
@@ -38,14 +41,28 @@ const theme = createTheme({
   },
 });
 
-const SignIn = () => {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      username: data.get('username'),
-      password: data.get('password'),
-    });
+const Login = () => {
+
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+
+  useEffect(() =>{
+    const userAuth = JSON.parse(localStorage.getItem("userAuth"));
+    if (userAuth && userAuth.id) {
+      navigate("/");
+    }
+  }, []);
+
+  const handleSend = async () => {
+    const response = await post("/login", { username, password });
+    if (response.error) {
+      console.log('Wrong password')
+    } else {
+      localStorage.setItem("userAuth", JSON.stringify(response.user));
+      navigate("/");
+    }
+    
   };
 
   return (
@@ -75,9 +92,9 @@ const SignIn = () => {
                 <LockOutlinedIcon color='primary' />
               </Avatar>
               <Typography component="h1" variant="h5">
-                Sign in
+                Sign In
               </Typography>
-              <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
+              <Box component="form" noValidate sx={{ mt: 1 }}>
                 <TextField
                   margin="normal"
                   required
@@ -87,24 +104,29 @@ const SignIn = () => {
                   name="username"
                   autoComplete="username"
                   autoFocus
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
                 />
                 <TextField
                   margin="normal"
                   required
                   fullWidth
-                  name="password"
-                  label="Password"
-                  type="password"
                   id="password"
+                  label="Password"
+                  name="password"
                   autoComplete="current-password"
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                 />
                 <Button
-                  type="submit"
+                  // type="submit"
                   fullWidth
                   variant="contained"
                   sx={{ mt: 3, mb: 2 }}
+                  onClick={handleSend}
                 >
-                  Sign In
+                  Login
                 </Button>
                 <Grid container >
                   <Grid item display='flex' justifyContent='space-between' sx={{ width: '100%' }} >
@@ -125,4 +147,4 @@ const SignIn = () => {
   );
 }
 
-export default SignIn;
+export default Login;

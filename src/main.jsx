@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { createBrowserRouter, RouterProvider, } from "react-router-dom";
 import Home from './components/Home/Home.jsx';
-import SignIn from './components/SignIn/SignIn.jsx'
+import Login from './components/Login/Login.jsx'
 import SignUp from './components/SignUp/SignUp.jsx';
 import ErrorPage from './components/error-page.jsx';
 import MovieDetailsPage, { loader as movieDetailsPageLoader } from './components/Movies/MovieDetailsPage.jsx';
@@ -16,8 +16,8 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
   },
   {
-    path: "/sign-in",
-    element: <SignIn />,
+    path: "/login",
+    element: <Login />,
   },
   {
     path: "/sign-up",
@@ -26,7 +26,8 @@ const router = createBrowserRouter([
   {
     path: "/movies/:movieID",
     element: <MovieDetailsPage />,
-    loader: movieDetailsPageLoader
+    loader: movieDetailsPageLoader,
+    errorElement: <ErrorPage />,
   },
 ]);
 

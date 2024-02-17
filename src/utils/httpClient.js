@@ -12,9 +12,11 @@ export async function post(path, body) {
         redirect: 'follow'
     };
 
-    fetch(`${BASE_URL}${path}`, requestOptions)
+    const data = fetch(`${BASE_URL}${path}`, requestOptions)
         .then(response => response.json())
         .catch(error => console.log('error', error));
+
+    return data
 }
 
 export async function get(path) {
