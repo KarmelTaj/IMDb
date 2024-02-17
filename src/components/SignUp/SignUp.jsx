@@ -28,14 +28,14 @@ const DarkendBackground = styled('div')(({ theme }) => ({
 const theme = createTheme({
   palette: {
     primary: {
-        main: '#121212',
-        contrastText: '#fff', 
+      main: '#121212',
+      contrastText: '#fff',
     },
     secondary: {
-        main: '#f5c518',
-        contrastText: '#000',
+      main: '#f5c518',
+      contrastText: '#000',
     },
-},
+  },
 });
 
 const SignUp = () => {
@@ -72,7 +72,7 @@ const SignUp = () => {
               }}
             >
               <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-                <LockOutlinedIcon color='primary'/>
+                <LockOutlinedIcon color='primary' />
               </Avatar>
               <Typography component="h1" variant="h5">
                 Sign Up
@@ -107,7 +107,10 @@ const SignUp = () => {
                   Sign Up
                 </Button>
                 <Grid container >
-                  <Grid item >
+                  <Grid item display='flex' justifyContent='space-between' sx={{ width: '100%' }} >
+                    <Link href="/login" variant="body2">
+                      {"Already have an account? Sign in"}
+                    </Link>
                     <Link href="/" variant="body2" underline="none">
                       {"Home"}
                     </Link>
