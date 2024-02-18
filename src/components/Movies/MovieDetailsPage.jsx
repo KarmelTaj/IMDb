@@ -34,8 +34,6 @@ const MovieDetailsPage = () => {
     // Check if movie is an array and get the first element
     const theMovie = Array.isArray(movie) ? movie[0] : movie;
 
-    const [theMovieRate, setTheMovieRate] = useState(+theMovie.rate)
-
     const handleRatingDialogClose = () => {
         setCanRate(false);
         const movieID = theMovie.id;
@@ -66,12 +64,10 @@ const MovieDetailsPage = () => {
 
         if (response.success) {
             setCanRate(false);
-            movie  = useLoaderData();
-            theMovie = Array.isArray(movie) ? movie[0] : movie;
-            setTheMovieRate(+theMovie.rate);
-            console.log(theMovieRate);
             navigate(`/movies/${movieID}`);
-            
+            // Reload the page after navigation
+            window.location.reload();
+
         } else {
             setCanRate(false);
             navigate(`/movies/${movieID}`);
@@ -128,8 +124,8 @@ const MovieDetailsPage = () => {
                 <Box className="descriptions">
                     <Box className="tags">
                         <Box sx={{ display: 'flex', flexDirection: 'row' }}>
-                            <Rating name="read-only" value={theMovieRate} precision={0.1} size="large" readOnly sx={{ alignItems: 'center' }} />
-                            <span className="rating"> {theMovieRate} / 5 </span>
+                            <Rating name="read-only" value={+theMovie.rate} precision={0.1} size="large" readOnly sx={{ alignItems: 'center' }} />
+                            <span className="rating"> {theMovie.rate} / 5 </span>
                         </Box>
                         {theMovie.genres?.map((genre, index) => (
                             <span key={index} className="tag">{genre}</span>
