@@ -22,6 +22,51 @@ body {
     ;
 }
 
+.MuiPaper-root.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation24.MuiDialog-paper.MuiDialog-paperScrollPaper.MuiDialog-paperWidthSm.MuiDialog-paperFullWidth.css-tlc64q-MuiPaper-root-MuiDialog-paper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    background-color: #1f1f1f;
+    padding: 32px;
+    border-radius: 12x;
+
+    .MuiRating-iconFilled,
+    .MuiRating-iconHover {
+        font-size: 36px;
+        color: #5799ef;
+        /* Set the desired font size for the filled and hover stars */
+    }
+
+    .MuiRating-iconEmpty {
+        font-size: 36px;
+        /* Set the desired font size for the empty stars */
+    }
+}
+
+
+.rate-movie-title {
+    display: block;
+    color: #fff !important;
+    font-size: 22px;
+    font-weight: 400;
+}
+
+.submit-rate:disabled {
+    background-color: hsla(0, 0%, 100%, .08) !important;
+    color: #c0c0c0 !important;
+}
+
+.submit-rate {
+    width: 50%;
+    background-color: #f5c518 !important;
+    color: #000 !important;
+    font-weight: 600 !important;
+    font-size: 12px !important;
+}
+
+
+
 .rate-wrapper {
     display: flex;
     flex-direction: column;
@@ -165,6 +210,17 @@ body {
     display: flex;
     flex-direction: column;
     gap: 20px;
+
+    .MuiRating-iconFilled,
+    .MuiRating-iconHover {
+        font-size: 18px;
+        /* Set the desired font size for the filled and hover stars */
+    }
+
+    .MuiRating-iconEmpty {
+        font-size: 18px;
+        /* Set the desired font size for the empty stars */
+    }
 }
 
 .tag {

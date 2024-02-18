@@ -28,6 +28,12 @@ const router = createBrowserRouter([
     element: <MovieDetailsPage />,
     loader: movieDetailsPageLoader,
     errorElement: <ErrorPage />,
+    children: [
+      {
+        path: "/movies/:movieID/rate-movie",
+        errorElement: <ErrorPage />
+      }
+    ],
   },
 ]);
 

@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { useLoaderData, useNavigate } from "react-router-dom";
-import { getID } from "../../utils/httpClient";
-import { Box, Typography, Button, Dialog, DialogTitle, DialogContent, DialogActions, Rating } from "@mui/material";
+import { getID, post } from "../../utils/httpClient";
+import { Box, Typography, Button, Dialog, DialogTitle, DialogContent, DialogActions, Rating, IconButton } from "@mui/material";
 import StarOutlineIcon from '@mui/icons-material/StarOutline';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import './MovieDetailsPage.css'
+import CloseIcon from '@mui/icons-material/Close';
+
 
 const theme = createTheme({
     palette: {
@@ -29,39 +31,80 @@ const MovieDetailsPage = () => {
     const [canRate, setCanRate] = useState(false);
     const [userRating, setUserRating] = useState(0);
 
+    // Check if movie is an array and get the first element
+    const theMovie = Array.isArray(movie) ? movie[0] : movie;
+
+    const [theMovieRate, setTheMovieRate] = useState(+theMovie.rate)
+
     const handleRatingDialogClose = () => {
         setCanRate(false);
+        const movieID = theMovie.id;
+        navigate(`/movies/${movieID}`);
     }
 
     const handleRate = () => {
         const userAuth = JSON.parse(localStorage.getItem("userAuth"));
         if (userAuth && userAuth.id) {
             setCanRate(true);
+            const movieID = theMovie.id;
+            navigate(`/movies/${movieID}/rate-movie`, { replace: true });
         } else {
             navigate("/login");
         }
     }
+    const handleRatingSubmit = async () => {
+        const movieID = theMovie.id;
+        let userRatingDecimal = parseFloat(userRating);
+        // Check if userAuth is available in localStorage
+        const userAuth = JSON.parse(localStorage.getItem("userAuth"));
+        if (!userAuth || !userAuth.id) {
+            console.error("User authentication data is missing or invalid.");
+            return;
+        }
+        const userID = userAuth.id;
+        const response = await post(`/movies/${movieID}/rate-movie`, { userID, rate: userRatingDecimal });
 
-    const handleRatingSubmit = () => {
-        // Handle the logic to submit the user's rating
-        // Update the state, close the dialog, etc.
+        if (response.success) {
+            setCanRate(false);
+            movie  = useLoaderData();
+            theMovie = Array.isArray(movie) ? movie[0] : movie;
+            setTheMovieRate(+theMovie.rate);
+            console.log(theMovieRate);
+            navigate(`/movies/${movieID}`);
+            
+        } else {
+            setCanRate(false);
+            navigate(`/movies/${movieID}`);
+        }
     }
-    
-    // Check if movie is an array and get the first element
-    const theMovie = Array.isArray(movie) ? movie[0] : movie
+
+    const scaledRating = `scale(3.${Math.floor(userRating)})`;
+
     return <>
         <Box className="movie-card">
-            <Dialog open={canRate} onClose={handleRatingDialogClose}>
-                <DialogTitle>Rate {theMovie.title}</DialogTitle>
-                <DialogContent>
-                    <Rating name="user-rating" value={userRating} precision={0.5} onChange={(event, newValue) => setUserRating(newValue)} />
-                </DialogContent>
-                <DialogActions>
-                    <Button onClick={handleRatingDialogClose}>Cancel</Button>
-                    <Button onClick={handleRatingSubmit} color="primary">Submit</Button>
-                </DialogActions>
-            </Dialog>
             <ThemeProvider theme={theme}>
+                <Dialog fullWidth={true} maxWidth={'sm'} open={canRate} onClose={handleRatingDialogClose}>
+                    <DialogTitle align="center" sx={{ color: 'secondary.main', fontWeight: '600' }}>
+                        Rate This <span className="rate-movie-title">{theMovie.title}</span>
+                        <IconButton
+                            edge="end"
+                            onClick={handleRatingDialogClose}
+                            sx={{ position: 'absolute', top: '16px', right: '32px' }}
+                        >
+                            <CloseIcon sx={{ color: '#fff' }} />
+                        </IconButton>
+                    </DialogTitle>
+                    <DialogContent>
+                        <Rating name="user-rating" value={userRating} size="large" onChange={(event, newValue) => setUserRating(newValue)} />
+                    </DialogContent>
+                    <DialogActions sx={{ width: '80%', display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
+                        <Button disabled={userRating === 0} onClick={handleRatingSubmit} className="submit-rate">
+                            Rate
+                        </Button>
+                    </DialogActions>
+                </Dialog>
+
+
                 <Box sx={{ position: 'absolute', bottom: '40px', right: '80px' }}>
                     <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', gap: '8px' }}>
                         <Button variant="contained" color='rate' onClick={handleRate} sx={{ p: '8px 20px', fontWeight: '600', fontSize: '28px', borderRadius: '6px' }}>
@@ -85,17 +128,17 @@ const MovieDetailsPage = () => {
                 <Box className="descriptions">
                     <Box className="tags">
                         <Box sx={{ display: 'flex', flexDirection: 'row' }}>
-                            <Rating name="read-only" value={+theMovie.rate} precision={0.1} size="large" readOnly sx={{ alignItems: 'center' }} />
-                            <span className="rating"> {theMovie.rate} / 5 </span>
+                            <Rating name="read-only" value={theMovieRate} precision={0.1} size="large" readOnly sx={{ alignItems: 'center' }} />
+                            <span className="rating"> {theMovieRate} / 5 </span>
                         </Box>
-                        {theMovie?.genres?.map((genre, index) => (
+                        {theMovie.genres?.map((genre, index) => (
                             <span key={index} className="tag">{genre}</span>
                         ))}
                     </Box>
                     <Box className="actors">
                         <Typography variant="body2" sx={{ fontSize: "17px " }}>{theMovie.description}</Typography>
                         <Box className="avatars">
-                            {theMovie?.stars?.map((star, index) => (
+                            {theMovie.stars?.map((star, index) => (
                                 <Box key={index} className="tooltip">
                                     <img className="avatar" src={star.picture} alt="Star Picture" />
                                     <span className="tooltiptext">{star.name}</span>
