@@ -62,7 +62,7 @@ const Login = () => {
       setPassword("");
     } else {
       localStorage.setItem("userAuth", JSON.stringify(response.user));
-      navigate("/");
+      navigate(-1);
     }
     
   };

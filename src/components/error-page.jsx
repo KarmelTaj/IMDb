@@ -77,7 +77,7 @@ const ErrorPage = () => {
                         fontSize: '14px',
                         fontStyle: 'italic'
                     }}>The Narrator, </span>
-                    <Link href="/" variant="h5  " underline="none" sx={{ color: '#136CB2', fontSize: '14px', fontStyle: 'italic' }}>
+                    <Link href="/movies/12" variant="h5  " underline="none" sx={{ color: '#136CB2', fontSize: '14px', fontStyle: 'italic' }}>
                         {" Fight Club (1999)"}
                     </Link>
                 </Typography>

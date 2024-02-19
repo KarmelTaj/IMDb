@@ -57,12 +57,12 @@ const SignUp = () => {
   const handleSubmit = async () => {
     const response = await post("/sign-up", { username, password });
     if (response.error) {
-      console.error(response.message);  // Corrected line
+      console.error(response.message);
       setUsername("");
       setPassword("");
     } else {
       localStorage.setItem("userAuth", JSON.stringify(response.user));
-      navigate("/");
+      navigate(-2);
     }
   };
 
