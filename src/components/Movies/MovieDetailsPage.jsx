@@ -74,8 +74,6 @@ const MovieDetailsPage = () => {
         }
     }
 
-    const scaledRating = `scale(3.${Math.floor(userRating)})`;
-
     return <>
         <Box className="movie-card">
             <ThemeProvider theme={theme}>

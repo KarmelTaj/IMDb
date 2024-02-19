@@ -12,9 +12,9 @@ const LoginButton = ({ loggedIn }) => {
         loggedIn ? localStorage.setItem("userAuth", null) : undefined;
     }
 
-    return <Link href={loggedIn ? "/" : "/login"} sx={{ position: 'absolute', right: '8px' }}>
+    return <Link href={loggedIn ? "/" : "/login"} >
         <Tooltip TransitionComponent={Zoom} title={loggedIn ? "Log Out" : "Go to your account"} >
-            <IconButton aria-label="login" size="large" color="secondary" onClick={handleClick}>
+            <IconButton aria-label="login" size="large" color="icon" onClick={handleClick} >
                 {loggedIn ?
                     <LogoutIcon sx={{ width: "2em", height: "2em" }} />
                     :

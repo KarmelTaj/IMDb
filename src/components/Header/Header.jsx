@@ -7,6 +7,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import InputBase from '@mui/material/InputBase';
 import Link from '@mui/material/Link';
 import LoginButton from './Login-button';
+import AdminButton from './Admin-button';
 
 const theme = createTheme({
     spacing: 8,
@@ -19,6 +20,10 @@ const theme = createTheme({
             main: '#f5c518',
             contrastText: '#000',
         },
+        icon: {
+            main: '#5799ef',
+            contrastText: '#1f1f1f',
+        }
     },
 });
 
@@ -71,13 +76,16 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 const Header = () => {
 
     const [loggedIn, setLoggedIn] = useState(false);
+    const [isAdmin, setIsAdmin] = useState(false);
 
     useEffect(() => {
         const userAuth = JSON.parse(localStorage.getItem("userAuth"));
         if (userAuth && userAuth.id) {
             setLoggedIn(true);
+            setIsAdmin(userAuth.isadmin)
         } else {
             setLoggedIn(false);
+            setIsAdmin(false)
         }
     }, [loggedIn]);
 
@@ -98,7 +106,10 @@ const Header = () => {
                                 inputProps={{ 'aria-label': 'search' }}
                             />
                         </Search>
-                        <LoginButton loggedIn={loggedIn} />
+                        <Box sx={{ position: 'absolute', right: '8px' }}>
+                            {isAdmin && <AdminButton /> }
+                            <LoginButton loggedIn={loggedIn} />
+                        </Box>
                     </Toolbar>
                 </AppBar>
             </Box>
