@@ -7,6 +7,9 @@ import SignUp from './components/SignUp/SignUp.jsx';
 import ErrorPage from './components/error-page.jsx';
 import MovieDetailsPage, { loader as movieDetailsPageLoader } from './components/Movies/MovieDetailsPage.jsx';
 import './index.css'
+import Admin from './components/Admin/Admin.jsx';
+import AddStar from './components/Admin/Add-Star.jsx';
+import AddMovie from './components/Admin/Add-Movie.jsx';
 
 
 const router = createBrowserRouter([
@@ -32,7 +35,23 @@ const router = createBrowserRouter([
       {
         path: "/movies/:movieID/rate-movie",
         errorElement: <ErrorPage />
-      }
+      },
+    ],
+  },
+  {
+    path: "/admin",
+    element: <Admin />,
+    children: [
+      {
+        path: "/admin/add-movie",
+        element: <AddMovie />,
+        errorElement: <ErrorPage />
+      },
+      {
+        path: "/admin/add-star",
+        element: <AddStar />,
+        errorElement: <ErrorPage />
+      },
     ],
   },
 ]);
