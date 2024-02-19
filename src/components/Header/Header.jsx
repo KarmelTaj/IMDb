@@ -74,17 +74,12 @@ const Header = () => {
 
     useEffect(() => {
         const userAuth = JSON.parse(localStorage.getItem("userAuth"));
-        console.log(userAuth);
         if (userAuth && userAuth.id) {
-          console.log("It reached here");
-          setLoggedIn(true);
-          console.log('Logged In in the reached area? ', loggedIn);
+            setLoggedIn(true);
         } else {
-          setLoggedIn(false);
+            setLoggedIn(false);
         }
-      
-        console.log('Logged In? ', loggedIn);
-      }, [loggedIn]);
+    }, [loggedIn]);
 
     return (
         <ThemeProvider theme={theme}>
