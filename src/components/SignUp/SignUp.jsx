@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -10,6 +10,9 @@ import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider, styled } from '@mui/material/styles';
+import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { post } from '../../utils/httpClient';
 
 const DarkendBackground = styled('div')(({ theme }) => ({
   position: 'absolute',
@@ -39,13 +42,28 @@ const theme = createTheme({
 });
 
 const SignUp = () => {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      username: data.get('username'),
-      password: data.get('password'),
-    });
+
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const userAuth = JSON.parse(localStorage.getItem("userAuth"));
+    if (userAuth && userAuth.id) {
+      navigate("/");
+    }
+  }, []);
+
+  const handleSubmit = async () => {
+    const response = await post("/sign-up", { username, password });
+    if (response.error) {
+      console.error(response.message);  // Corrected line
+      setUsername("");
+      setPassword("");
+    } else {
+      localStorage.setItem("userAuth", JSON.stringify(response.user));
+      navigate("/");
+    }
   };
 
   return (
@@ -77,7 +95,7 @@ const SignUp = () => {
               <Typography component="h1" variant="h5">
                 Sign Up
               </Typography>
-              <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
+              <Box component="form" noValidate sx={{ mt: 1 }}>
                 <TextField
                   margin="normal"
                   required
@@ -87,22 +105,26 @@ const SignUp = () => {
                   name="username"
                   autoComplete="username"
                   autoFocus
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
                 />
                 <TextField
                   margin="normal"
                   required
                   fullWidth
-                  name="password"
-                  label="Password"
-                  type="password"
                   id="password"
+                  label="Password"
+                  name="password"
                   autoComplete="current-password"
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                 />
                 <Button
-                  type="submit"
                   fullWidth
                   variant="contained"
                   sx={{ mt: 3, mb: 2 }}
+                  onClick={handleSubmit}
                 >
                   Sign Up
                 </Button>

@@ -57,7 +57,9 @@ const Login = () => {
   const handleSend = async () => {
     const response = await post("/login", { username, password });
     if (response.error) {
-      console.log('Wrong password')
+      console.log('Wrong password');
+      setUsername("");
+      setPassword("");
     } else {
       localStorage.setItem("userAuth", JSON.stringify(response.user));
       navigate("/");
