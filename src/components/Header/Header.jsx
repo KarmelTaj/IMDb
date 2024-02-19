@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState, useEffect } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -6,10 +6,7 @@ import { createTheme, ThemeProvider, styled, alpha } from '@mui/material/styles'
 import SearchIcon from '@mui/icons-material/Search';
 import InputBase from '@mui/material/InputBase';
 import Link from '@mui/material/Link';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import IconButton from '@mui/material/IconButton';
-import Tooltip from '@mui/material/Tooltip';
-import { Zoom } from '@mui/material';
+import LoginButton from './Login-button';
 
 const theme = createTheme({
     spacing: 8,
@@ -73,6 +70,21 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 const Header = () => {
 
+    const [loggedIn, setLoggedIn] = useState(false);
+
+    useEffect(() => {
+        const userAuth = JSON.parse(localStorage.getItem("userAuth"));
+        console.log(userAuth);
+        if (userAuth && userAuth.id) {
+          console.log("It reached here");
+          setLoggedIn(true);
+          console.log('Logged In in the reached area? ', loggedIn);
+        } else {
+          setLoggedIn(false);
+        }
+      
+        console.log('Logged In? ', loggedIn);
+      }, [loggedIn]);
 
     return (
         <ThemeProvider theme={theme}>
@@ -91,13 +103,7 @@ const Header = () => {
                                 inputProps={{ 'aria-label': 'search' }}
                             />
                         </Search>
-                        <Link href="/login" sx={{ position: 'absolute', right: '8px' }}>
-                            <Tooltip TransitionComponent={Zoom} title="Go to your account">
-                                <IconButton aria-label="login" size="large" color="secondary">
-                                    <AccountCircleIcon sx={{ width: "2em", height: "2em" }} />
-                                </IconButton>
-                            </Tooltip>
-                        </Link>
+                        <LoginButton loggedIn={loggedIn} />
                     </Toolbar>
                 </AppBar>
             </Box>
