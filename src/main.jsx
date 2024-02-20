@@ -10,6 +10,7 @@ import './index.css'
 import Admin from './components/Admin/Admin.jsx';
 import AddStar from './components/Admin/Add-Star.jsx';
 import AddMovie from './components/Admin/Add-Movie.jsx';
+import DeleteMovie from './components/Admin/Delete-Movie.jsx';
 
 
 const router = createBrowserRouter([
@@ -50,6 +51,11 @@ const router = createBrowserRouter([
       {
         path: "/admin/add-star",
         element: <AddStar />,
+        errorElement: <ErrorPage />
+      },
+      {
+        path: "/admin/delete-movie",
+        element: <DeleteMovie />,
         errorElement: <ErrorPage />
       },
     ],

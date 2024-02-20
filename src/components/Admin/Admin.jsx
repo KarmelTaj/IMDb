@@ -3,11 +3,13 @@ import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
+import AddMovie from './Add-Movie';
 import AddStar from './Add-Star';
+import DeleteMovie from './Delete-Movie';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
 import './Admin.css'
-import AddMovie from './Add-Movie';
+
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -82,6 +84,11 @@ const Admin = () => {
             if (userAuth === null) {
                 navigate('/');
             }
+        } else if (value === 2) {
+            navigate('/admin/delete-movie', { replace: true });
+            if (userAuth === null) {
+                navigate('/');
+            }
         }
     }, [value, navigate]);
 
@@ -101,12 +108,16 @@ const Admin = () => {
                 >
                     <Tab label="Add Movie" {...a11yProps(0)} sx={{ color: theme.palette.backgrounds.contrastText }} />
                     <Tab label="Add Star" {...a11yProps(1)} sx={{ color: theme.palette.backgrounds.contrastText }} />
+                    <Tab label="Delete Movie" {...a11yProps(2)} sx={{ color: theme.palette.backgrounds.contrastText }} />
                 </Tabs>
                 <TabPanel value={value} index={0}>
                     {value === 0 && <AddMovie />}
                 </TabPanel>
                 <TabPanel value={value} index={1} >
                     <AddStar />
+                </TabPanel>
+                <TabPanel value={value} index={2} >
+                    <DeleteMovie />
                 </TabPanel>
             </Box>
         </ThemeProvider>
