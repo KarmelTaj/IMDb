@@ -12,6 +12,8 @@ import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider, styled } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import { Collapse, IconButton, Alert, AlertTitle } from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
 import { post } from '../../utils/httpClient';
 
 const DarkendBackground = styled('div')(({ theme }) => ({
@@ -45,6 +47,7 @@ const SignUp = () => {
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [openAlert, setOpenAlert] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -57,7 +60,7 @@ const SignUp = () => {
   const handleSubmit = async () => {
     const response = await post("/sign-up", { username, password });
     if (response.error) {
-      console.error(response.message);
+      setOpenAlert(true);
       setUsername("");
       setPassword("");
     } else {
@@ -138,6 +141,12 @@ const SignUp = () => {
                     </Link>
                   </Grid>
                 </Grid>
+                <Collapse in={openAlert}>
+                  <Alert action={<IconButton onClick={() => { setOpenAlert(false) }}><CloseIcon></CloseIcon></IconButton>} severity="warning">
+                    <AlertTitle>Warning</AlertTitle>
+                    A User with This Username Already Exists.
+                  </Alert>
+                </Collapse>
               </Box>
             </Box>
           </Grid>

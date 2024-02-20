@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Box, Grid, Paper, Typography, TextField, Button } from "@mui/material";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { post } from "../../utils/httpClient";
+import { Collapse, Alert, AlertTitle } from '@mui/material';
 
 const theme = createTheme({
     palette: {
@@ -25,17 +26,24 @@ const AddStar = () => {
 
     const [name, setName] = useState("");
     const [picture, setPicture] = useState("");
+    const [openWarningAlert, setOpenrWarningAlert] = useState(false);
+    const [openSuccessfulAlert, setOpenSuccessfulAlert] = useState(false);
 
     const handleSend = async () => {
         const response = await post("/admin/add-star", { name, picture });
+        const delay = ms => new Promise(res => setTimeout(res, ms));
         if (response.error) {
-            console.log(response.message);
-            setUsername("");
-            setPassword("");
+            setOpenrWarningAlert(true);
+            setName("");
+            setPicture("");
+            await delay(3000);
+            setOpenrWarningAlert(false);
         } else {
-            //success
-            setUsername("");
-            setPassword("");
+            setOpenSuccessfulAlert(true);
+            setName("");
+            setPicture("");
+            await delay(3000);
+            setOpenSuccessfulAlert(false);
         }
     };
 
@@ -90,11 +98,23 @@ const AddStar = () => {
                         >
                             Add
                         </Button>
+                        <Collapse in={openWarningAlert}>
+                            <Alert severity="warning">
+                                <AlertTitle>Warning</AlertTitle>
+                                A Star with This Name Already Exists.
+                            </Alert>
+                        </Collapse>
+                        <Collapse in={openSuccessfulAlert}>
+                            <Alert severity="success">
+                                <AlertTitle>success</AlertTitle>
+                                The Star Was Successfuly Added.
+                            </Alert>
+                        </Collapse>
                     </Box>
                 </Box>
             </Grid>
         </Grid>
-    </ThemeProvider>
+    </ThemeProvider >
 }
 
 export default AddStar

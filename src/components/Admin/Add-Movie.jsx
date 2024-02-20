@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Box, Grid, Paper, Typography, TextField, Button, Select, MenuItem, InputLabel, FormControl } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { get, post } from "../../utils/httpClient";
-import './Add-Movie.css'
+import './Add-Movie.css';
+import { Collapse, Alert, AlertTitle } from '@mui/material';
 
 const theme = createTheme({
     palette: {
@@ -31,6 +32,8 @@ const AddMovie = () => {
     const [selectedGenres, setSelectedGenres] = useState([]);
     const [genres, setGenres] = useState([]);
     const [movies, setMovies] = useState([]);
+    const [openWarningAlert, setOpenrWarningAlert] = useState(false);
+    const [openSuccessfulAlert, setOpenSuccessfulAlert] = useState(false);
 
     const loadGenresAndMovies = async () => {
         const data = await get('/admin/add-movie');
@@ -56,14 +59,15 @@ const AddMovie = () => {
     };
 
     const checkIfMovieExists = () => {
-        return movies.some(movie => movie.title.toLowerCase() === title.toLowerCase())
+        return movies.some(movie => movie.title.toLowerCase() === title.toLowerCase());
     }
 
 
     const handleClick = async () => {
         const response = await post("/admin/add-movie", { title, year, duration, description, director, posterUrl, backdropUrl, mpa, selectedStars, selectedGenres });
+        const delay = ms => new Promise(res => setTimeout(res, ms));
         if (response.error) {
-            console.log(response.message);
+            setOpenrWarningAlert(true)
             setTitle("");
             setYear(2000);
             setDuration("");
@@ -74,8 +78,11 @@ const AddMovie = () => {
             setMpa("");
             setSelectedStars([]);
             setSelectedGenres([]);
+            await delay(3000);
+            setOpenrWarningAlert(false)
         } else {
             //success
+            setOpenSuccessfulAlert(true);
             setTitle("");
             setYear(2000);
             setDuration("");
@@ -86,8 +93,9 @@ const AddMovie = () => {
             setMpa("");
             setSelectedStars([]);
             setSelectedGenres([]);
+            await delay(3000);
+            setOpenSuccessfulAlert(false);
         }
-
     };
 
 
@@ -293,6 +301,24 @@ const AddMovie = () => {
                             >
                                 Add
                             </Button>
+                            <Collapse in={openWarningAlert}>
+                                <Alert severity="warning">
+                                    <AlertTitle>Warning</AlertTitle>
+                                    Failed to Add the Movie.
+                                </Alert>
+                            </Collapse>
+                            <Collapse in={openSuccessfulAlert}>
+                                <Alert severity="success">
+                                    <AlertTitle>Success</AlertTitle>
+                                    The Movie Was Successfuly Added.
+                                </Alert>
+                            </Collapse>
+                            <Collapse in={checkIfMovieExists()}>
+                                <Alert severity="error">
+                                    <AlertTitle>Warning</AlertTitle>
+                                    This Movie Already Exists.
+                                </Alert>
+                            </Collapse>
                         </Box>
                     </Box>
                 </Grid>

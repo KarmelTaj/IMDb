@@ -13,6 +13,8 @@ import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider, styled } from '@mui/material/styles';
 import { post } from '../../utils/httpClient'
 import { useNavigate } from 'react-router-dom';
+import { Collapse, IconButton, Alert, AlertTitle } from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
 
 const DarkendBackground = styled('div')(({ theme }) => ({
   position: 'absolute',
@@ -45,9 +47,10 @@ const Login = () => {
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [openAlert, setOpenAlert] = useState(false);
   const navigate = useNavigate();
 
-  useEffect(() =>{
+  useEffect(() => {
     const userAuth = JSON.parse(localStorage.getItem("userAuth"));
     if (userAuth && userAuth.id) {
       navigate("/");
@@ -57,14 +60,13 @@ const Login = () => {
   const handleSend = async () => {
     const response = await post("/login", { username, password });
     if (response.error) {
-      console.log('Wrong password');
+      setOpenAlert(true);
       setUsername("");
       setPassword("");
     } else {
       localStorage.setItem("userAuth", JSON.stringify(response.user));
       navigate(-1);
     }
-    
   };
 
   return (
@@ -140,6 +142,12 @@ const Login = () => {
                     </Link>
                   </Grid>
                 </Grid>
+                <Collapse in={openAlert}>
+                  <Alert action={<IconButton onClick={() => {setOpenAlert(false)}}><CloseIcon></CloseIcon></IconButton>} severity="warning">
+                    <AlertTitle>Warning</AlertTitle>
+                    Wrong Username and/or Password
+                  </Alert>
+                </Collapse>
               </Box>
             </Box>
           </Grid>

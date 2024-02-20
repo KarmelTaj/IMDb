@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Box, Grid, Paper, Typography, Button, Select, MenuItem, FormControl, InputLabel } from "@mui/material";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { get, DELETE } from "../../utils/httpClient";
-import { useNavigate } from "react-router-dom";
+import { Collapse, Alert, AlertTitle } from '@mui/material';
 
 
 const theme = createTheme({
@@ -26,7 +26,7 @@ const theme = createTheme({
 const DeleteMovie = () => {
     const [selectedMovie, setSelectedMovie] = useState("");
     const [movies, setMovies] = useState([]);
-    const navigate = useNavigate();
+    const [openAlert, setOpenAlert] = useState(false);
 
     const loadMovies = async () => {
         const data = await get('/admin/delete-movie');
@@ -44,13 +44,15 @@ const DeleteMovie = () => {
 
     const handleDelete = async () => {
         const response = await DELETE("/admin/delete-movie", { id: selectedMovie });
+        const delay = ms => new Promise(res => setTimeout(res, ms));
         if (response.error) {
-            console.log(response.message);
             setSelectedMovie("");
         } else {
-            //success
+            setOpenAlert(true);
             setSelectedMovie("");
             loadMovies();
+            await delay(3000);
+            setOpenAlert(false);
         }
     };
 
@@ -90,7 +92,6 @@ const DeleteMovie = () => {
                                     ))}
                                 </Select>
                             </FormControl>
-
                             <Button
                                 fullWidth
                                 variant="contained"
@@ -100,6 +101,12 @@ const DeleteMovie = () => {
                             >
                                 Delete
                             </Button>
+                            <Collapse in={openAlert}>
+                                <Alert severity="success">
+                                    <AlertTitle>Success</AlertTitle>
+                                    The Movie Successfuly Deleted
+                                </Alert>
+                            </Collapse>
                         </Box>
                     </Box>
                 </Grid>

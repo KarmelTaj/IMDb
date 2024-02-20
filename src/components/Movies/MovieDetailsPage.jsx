@@ -7,6 +7,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import './MovieDetailsPage.css'
 import CloseIcon from '@mui/icons-material/Close';
 import HomeIcon from '@mui/icons-material/Home';
+import { Collapse, Alert, AlertTitle } from '@mui/material';
 
 
 const theme = createTheme({
@@ -33,6 +34,7 @@ const MovieDetailsPage = () => {
     const navigate = useNavigate();
     const [canRate, setCanRate] = useState(false);
     const [userRating, setUserRating] = useState(0);
+    const [openAlert, setOpenAlert] = useState(false);
 
     // Check if movie is an array and get the first element
     const theMovie = Array.isArray(movie) ? movie[0] : movie;
@@ -66,11 +68,14 @@ const MovieDetailsPage = () => {
         const response = await post(`/movies/${movieID}/rate-movie`, { userID, rate: userRatingDecimal });
 
         if (response.success) {
+            const delay = ms => new Promise(res => setTimeout(res, ms));
+            setOpenAlert(true);
+            await delay(3000);
+            setOpenAlert(false);
             setCanRate(false);
             navigate(`/movies/${movieID}`);
             // Reload the page after navigation
             window.location.reload();
-
         } else {
             setCanRate(false);
             navigate(`/movies/${movieID}`);
@@ -106,6 +111,12 @@ const MovieDetailsPage = () => {
                             Rate
                         </Button>
                     </DialogActions>
+                    <Collapse in={openAlert}>
+                        <Alert severity="success">
+                            <AlertTitle>success</AlertTitle>
+                            You Rated {userRating} for {theMovie.title}
+                        </Alert>
+                    </Collapse>
                 </Dialog>
 
 
