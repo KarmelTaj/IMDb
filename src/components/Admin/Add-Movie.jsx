@@ -19,21 +19,24 @@ const theme = createTheme({
 
 const AddMovie = () => {
     const [title, setTitle] = useState("");
-    const [year, setYear] = useState("");
+    const [year, setYear] = useState(2000);
     const [duration, setDuration] = useState("");
     const [description, setDescription] = useState("");
     const [director, setDirector] = useState("");
     const [posterUrl, setPosterUrl] = useState("");
     const [backdropUrl, setBackdropUrl] = useState("");
+    const [mpa, setMpa] = useState("");
     const [selectedStars, setSelectedStars] = useState([]);
     const [stars, setStars] = useState([]);
     const [selectedGenres, setSelectedGenres] = useState([]);
     const [genres, setGenres] = useState([]);
+    const [movies, setMovies] = useState([]);
 
     const loadGenresAndMovies = async () => {
         const data = await get('/admin/add-movie');
         setGenres(data?.genres);
         setStars(data?.stars);
+        setMovies(data?.movies);
     }
 
     useEffect(() => {
@@ -46,25 +49,15 @@ const AddMovie = () => {
         setSelectedStars(selectedStars);
     };
 
-
     const handleGenresChange = (event) => {
         // Ensure that the number of selected stars does not exceed 3
         const selectedGenres = event.target.value.slice(0, 3);
         setSelectedGenres(selectedGenres);
     };
 
-    // const handleSend = async () => {
-    //     const response = await post("/admin/add-star", { name, picture });
-    //     if (response.error) {
-    //         console.log(response.message);
-    //         setUsername("");
-    //         setPassword("");
-    //     } else {
-    //         //success
-    //         setUsername("");
-    //         setPassword("");
-    //     }
-    // };
+    const checkIfMovieExists = () => {
+        return movies.some(movie => movie.title.toLowerCase() === title.toLowerCase())
+    }
 
     return (
         <ThemeProvider theme={theme}>
@@ -87,34 +80,20 @@ const AddMovie = () => {
                             Add a New Movie
                         </Typography>
                         <Box component="form" noValidate sx={{ mt: 1 }}>
-                            <TextField
-                                color="secondary"
-                                margin="normal"
-                                required
-                                fullWidth
-                                id="movie-title"
-                                label="Movie Title"
-                                name="title"
-                                autoComplete="title"
-                                autoFocus
-                                value={title}
-                                onChange={(e) => setTitle(e.target.value)}
-                            />
                             <Grid container spacing={2}>
-                                <Grid item xs={4}>
+                                <Grid item xs={8}>
                                     <TextField
                                         color="secondary"
                                         margin="normal"
                                         required
                                         fullWidth
-                                        type="number"
-                                        id="year"
-                                        label="Year"
-                                        name="year"
-                                        autoComplete="year"
-                                        placeholder={'2000'}
-                                        value={year}
-                                        onChange={(e) => setYear(e.target.value)}
+                                        id="movie-title"
+                                        label="Movie Title"
+                                        name="title"
+                                        autoComplete="title"
+                                        autoFocus
+                                        value={title}
+                                        onChange={(e) => setTitle(e.target.value)}
                                     />
                                 </Grid>
                                 <Grid item xs={4}>
@@ -132,6 +111,23 @@ const AddMovie = () => {
                                         onChange={(e) => setDuration(e.target.value)}
                                     />
                                 </Grid>
+                            </Grid>
+                            <Grid container spacing={2}>
+                                <Grid item xs={4}>
+                                    <TextField
+                                        color="secondary"
+                                        margin="normal"
+                                        required
+                                        fullWidth
+                                        type="number"
+                                        id="year"
+                                        label="Year"
+                                        name="year"
+                                        autoComplete="year"
+                                        value={year}
+                                        onChange={(e) => setYear(+e.target.value)}
+                                    />
+                                </Grid>
                                 <Grid item xs={4}>
                                     <TextField
                                         color="secondary"
@@ -145,6 +141,26 @@ const AddMovie = () => {
                                         value={director}
                                         onChange={(e) => setDirector(e.target.value)}
                                     />
+                                </Grid>
+                                <Grid item xs={4}>
+                                    <FormControl fullWidth sx={{ mt: 2 }}>
+                                        <InputLabel id="mpa-label" color="secondary">MPA</InputLabel>
+                                        <Select
+                                            color="secondary"
+                                            labelId="mpa-label"
+                                            id="mpa"
+                                            value={mpa}
+                                            onChange={(e) => setMpa(e.target.value)}
+                                            label="MPA"
+                                        >
+                                            {/* MPA Options */}
+                                            <MenuItem value="G">G</MenuItem>
+                                            <MenuItem value="PG">PG</MenuItem>
+                                            <MenuItem value="PG-13">PG-13</MenuItem>
+                                            <MenuItem value="R">R</MenuItem>
+                                            <MenuItem value="NC-17">NC-17</MenuItem>
+                                        </Select>
+                                    </FormControl>
                                 </Grid>
                             </Grid>
                             <TextField
@@ -239,6 +255,7 @@ const AddMovie = () => {
                                 fullWidth
                                 variant="contained"
                                 color="secondary"
+                                disabled={checkIfMovieExists()}
                                 sx={{ mt: 3, mb: 2, fontWeight: '600', fontSize: '1rem', lineHeight: '2.5' }}
                             >
                                 Add
