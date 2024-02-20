@@ -34,6 +34,7 @@ const AddMovie = () => {
     const [movies, setMovies] = useState([]);
     const [openWarningAlert, setOpenrWarningAlert] = useState(false);
     const [openSuccessfulAlert, setOpenSuccessfulAlert] = useState(false);
+    const [openNotSelectedEnough, setOpenNotSelectedEnough] = useState(false);
 
     const loadGenresAndMovies = async () => {
         const data = await get('/admin/add-movie');
@@ -64,10 +65,16 @@ const AddMovie = () => {
 
 
     const handleClick = async () => {
-        const response = await post("/admin/add-movie", { title, year, duration, description, director, posterUrl, backdropUrl, mpa, selectedStars, selectedGenres });
         const delay = ms => new Promise(res => setTimeout(res, ms));
+        if (selectedStars.length === 0 || selectedGenres.length === 0) {
+            setOpenNotSelectedEnough(true);
+            await delay(3000);
+            setOpenNotSelectedEnough(false);
+            return;
+        }
+        const response = await post("/admin/add-movie", { title, year, duration, description, director, posterUrl, backdropUrl, mpa, selectedStars, selectedGenres });
         if (response.error) {
-            setOpenrWarningAlert(true)
+            setOpenrWarningAlert(true);
             setTitle("");
             setYear(2000);
             setDuration("");
@@ -79,7 +86,7 @@ const AddMovie = () => {
             setSelectedStars([]);
             setSelectedGenres([]);
             await delay(3000);
-            setOpenrWarningAlert(false)
+            setOpenrWarningAlert(false);
         } else {
             //success
             setOpenSuccessfulAlert(true);
@@ -317,6 +324,12 @@ const AddMovie = () => {
                                 <Alert severity="error">
                                     <AlertTitle>Warning</AlertTitle>
                                     This Movie Already Exists.
+                                </Alert>
+                            </Collapse>
+                            <Collapse in={openNotSelectedEnough}>
+                                <Alert severity="error">
+                                    <AlertTitle>Warning</AlertTitle>
+                                    You Sould Choose One Star and Genre Atleast.
                                 </Alert>
                             </Collapse>
                         </Box>
