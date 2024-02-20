@@ -65,17 +65,23 @@ const Admin = () => {
     const [value, setValue] = useState(0);
     const navigate = useNavigate();
 
-
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
 
     useEffect(() => {
+        const userAuth = JSON.parse(localStorage.getItem("userAuth"));
         // Update the URL based on the selected tab
         if (value === 0) {
-            navigate(`/admin/add-movie`, { replace: true });
+            navigate('/admin/add-movie', { replace: true });
+            if (userAuth === null) {
+                navigate('/');
+            }
         } else if (value === 1) {
-            navigate(`/admin/add-star`, { replace: true });
+            navigate('/admin/add-star', { replace: true });
+            if (userAuth === null) {
+                navigate('/');
+            }
         }
     }, [value, navigate]);
 
@@ -97,7 +103,7 @@ const Admin = () => {
                     <Tab label="Add Star" {...a11yProps(1)} sx={{ color: theme.palette.backgrounds.contrastText }} />
                 </Tabs>
                 <TabPanel value={value} index={0}>
-                    <AddMovie />
+                    {value === 0 && <AddMovie />}
                 </TabPanel>
                 <TabPanel value={value} index={1} >
                     <AddStar />
