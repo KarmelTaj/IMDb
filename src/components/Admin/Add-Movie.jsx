@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Box, Grid, Paper, Typography, TextField, Button, Select, MenuItem, InputLabel, FormControl } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { get } from "../../utils/httpClient";
+import { get, post } from "../../utils/httpClient";
 import './Add-Movie.css'
 
 const theme = createTheme({
@@ -58,6 +58,38 @@ const AddMovie = () => {
     const checkIfMovieExists = () => {
         return movies.some(movie => movie.title.toLowerCase() === title.toLowerCase())
     }
+
+
+    const handleClick = async () => {
+        const response = await post("/admin/add-movie", { title, year, duration, description, director, posterUrl, backdropUrl, mpa, selectedStars, selectedGenres });
+        if (response.error) {
+            console.log(response.message);
+            setTitle("");
+            setYear(2000);
+            setDuration("");
+            setDescription("");
+            setDirector("");
+            setPosterUrl("");
+            setBackdropUrl("");
+            setMpa("");
+            setSelectedStars([]);
+            setSelectedGenres([]);
+        } else {
+            //success
+            setTitle("");
+            setYear(2000);
+            setDuration("");
+            setDescription("");
+            setDirector("");
+            setPosterUrl("");
+            setBackdropUrl("");
+            setMpa("");
+            setSelectedStars([]);
+            setSelectedGenres([]);
+        }
+
+    };
+
 
     return (
         <ThemeProvider theme={theme}>
@@ -256,6 +288,7 @@ const AddMovie = () => {
                                 variant="contained"
                                 color="secondary"
                                 disabled={checkIfMovieExists()}
+                                onClick={handleClick}
                                 sx={{ mt: 3, mb: 2, fontWeight: '600', fontSize: '1rem', lineHeight: '2.5' }}
                             >
                                 Add
