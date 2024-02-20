@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Box, Grid, Paper, Typography, TextField, Button, Link } from "@mui/material";
+import { Box, Grid, Paper, Typography, TextField, Button } from "@mui/material";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { post } from "../../utils/httpClient";
 
@@ -85,7 +85,7 @@ const AddStar = () => {
                             fullWidth
                             variant="contained"
                             color="secondary"
-                            sx={{ mt: 3, mb: 2, fontWeight: '600', fontSize: '1rem' }}
+                            sx={{ mt: 3, mb: 2, fontWeight: '600', fontSize: '1rem', lineHeight: '2.5' }}
                             onClick={handleSend}
                         >
                             Add
