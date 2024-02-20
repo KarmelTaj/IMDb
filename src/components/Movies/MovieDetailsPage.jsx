@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { useLoaderData, useNavigate } from "react-router-dom";
 import { getID, post } from "../../utils/httpClient";
-import { Box, Typography, Button, Dialog, DialogTitle, DialogContent, DialogActions, Rating, IconButton } from "@mui/material";
+import { Box, Typography, Button, Dialog, DialogTitle, DialogContent, DialogActions, Rating, IconButton, Fab } from "@mui/material";
 import StarOutlineIcon from '@mui/icons-material/StarOutline';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import './MovieDetailsPage.css'
 import CloseIcon from '@mui/icons-material/Close';
+import HomeIcon from '@mui/icons-material/Home';
 
 
 const theme = createTheme({
@@ -20,6 +21,8 @@ const theme = createTheme({
         },
         rate: {
             main: '#1f1f1f',
+            light: '#4b4b4b',
+            dark: '#151515',
             contrastText: '#5799ef',
         }
     },
@@ -74,9 +77,16 @@ const MovieDetailsPage = () => {
         }
     }
 
+    const navigateToHome = () => {
+        navigate("/");
+    };
+
     return <>
         <Box className="movie-card">
             <ThemeProvider theme={theme}>
+                <Fab variant="circular" color="rate" size="large" onClick={navigateToHome} sx={{ position: "absolute", top: '40px', left: '60px', width: '72px', height: '72px' }}>
+                    <HomeIcon sx={{ height: '35px', width: '35px' }} />
+                </Fab>
                 <Dialog fullWidth={true} maxWidth={'sm'} open={canRate} onClose={handleRatingDialogClose}>
                     <DialogTitle align="center" sx={{ color: 'secondary.main', fontWeight: '600' }}>
                         Rate This <span className="rate-movie-title">{theMovie.title}</span>

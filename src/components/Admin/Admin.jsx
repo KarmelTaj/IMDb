@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
+import Fab from '@mui/material/Fab';
+import HomeIcon from '@mui/icons-material/Home';
 import AddMovie from './Add-Movie';
 import AddStar from './Add-Star';
 import DeleteMovie from './Delete-Movie';
@@ -49,6 +51,8 @@ const theme = createTheme({
     palette: {
         primary: {
             main: '#f5c518',
+            light: '#f7d046',
+            dark: '#ab8910',
             contrastText: '#000',
         },
         secondary: {
@@ -92,9 +96,15 @@ const Admin = () => {
         }
     }, [value, navigate]);
 
+    const navigateToHome = () => {
+        navigate("/");
+    };
 
     return (
         <ThemeProvider theme={theme}>
+            <Fab variant="circular" color="primary" size="large" onClick={navigateToHome} sx={{ position: "absolute", top: '40px', right: '60px', width: '72px', height: '72px' }}>
+                <HomeIcon sx={{ height: '35px', width: '35px' }} />
+            </Fab>
             <Box
                 sx={{ flexGrow: 1, bgcolor: theme.palette.backgrounds.contrastText, display: 'flex', height: "100vh" }}
             >
