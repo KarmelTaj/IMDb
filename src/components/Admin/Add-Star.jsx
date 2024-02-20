@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Box, Grid, Paper, Typography, TextField, Button, Link } from "@mui/material";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { post } from "../../utils/httpClient";
 
 const theme = createTheme({
     palette: {
@@ -24,6 +25,19 @@ const AddStar = () => {
 
     const [name, setName] = useState("");
     const [picture, setPicture] = useState("");
+
+    const handleSend = async () => {
+        const response = await post("/admin/add-star", { name, picture });
+        if (response.error) {
+            console.log(response.message);
+            setUsername("");
+            setPassword("");
+        } else {
+            //success
+            setUsername("");
+            setPassword("");
+        }
+    };
 
 
     return <ThemeProvider theme={theme}>
@@ -72,6 +86,7 @@ const AddStar = () => {
                             variant="contained"
                             color="secondary"
                             sx={{ mt: 3, mb: 2, fontWeight: '600', fontSize: '1rem' }}
+                            onClick={handleSend}
                         >
                             Add
                         </Button>
