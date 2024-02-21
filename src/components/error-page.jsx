@@ -1,10 +1,18 @@
 import { Box, Typography } from "@mui/material";
 import { useRouteError } from "react-router-dom";
-import Link from '@mui/material/Link';
+import { useNavigate } from "react-router-dom";
 
 const ErrorPage = () => {
     const error = useRouteError();
-    console.error(error);
+    const navigate = useNavigate();
+
+    const handleSendToHome = () => {
+        navigate("/");
+    }
+
+    const handleSendToMovie = () => {
+        navigate("/movies/12");
+    }
 
     return (
         <Box sx={{
@@ -22,9 +30,7 @@ const ErrorPage = () => {
             }}>
                 <Typography variant="h4" sx={{ color: '#999999', fontSize: '17.5px', p: '30px 70px 20px' }}>
                     The requested URL was not found on our server.
-                    <Link href="/" variant="h4  " underline="none" sx={{ color: '#136CB20', fontSize: '17.5px', fontWeight: 400 }}>
-                        {" Go to the homepage "}
-                    </Link>
+                    <Typography onClick={handleSendToHome} variant='h4' sx={{ textDecoration: 'underline', cursor: 'pointer', color: '#136CB20', fontSize: '17.5px', fontWeight: 400 }}> Go to the homepage </Typography>
                     »
                 </Typography>
                 <Box sx={{
@@ -77,9 +83,7 @@ const ErrorPage = () => {
                         fontSize: '14px',
                         fontStyle: 'italic'
                     }}>The Narrator, </span>
-                    <Link href="/movies/12" variant="h5  " underline="none" sx={{ color: '#136CB2', fontSize: '14px', fontStyle: 'italic' }}>
-                        {" Fight Club (1999)"}
-                    </Link>
+                    <Typography onClick={handleSendToMovie} variant='h5' sx={{ cursor: 'pointer', color: '#136CB2', fontSize: '14px', fontStyle: 'italic' }}> Fight Club (1999)</Typography>
                 </Typography>
             </Box >
         </Box>
