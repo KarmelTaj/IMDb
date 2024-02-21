@@ -80,17 +80,17 @@ const Admin = () => {
         // Update the URL based on the selected tab
         if (value === 0) {
             navigate('/admin/add-movie', { replace: true });
-            if (userAuth === null) {
+            if (userAuth === null || !userAuth.isadmin) {
                 navigate('/');
             }
         } else if (value === 1) {
             navigate('/admin/add-star', { replace: true });
-            if (userAuth === null) {
+            if (userAuth === null || !userAuth.isadmin) {
                 navigate('/');
             }
         } else if (value === 2) {
             navigate('/admin/delete-movie', { replace: true });
-            if (userAuth === null) {
+            if (userAuth === null || !userAuth.isadmin) {
                 navigate('/');
             }
         }
