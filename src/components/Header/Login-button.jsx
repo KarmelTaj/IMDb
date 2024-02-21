@@ -1,26 +1,18 @@
 import React from "react";
+import Link from '@mui/material/Link';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
-import Box from "@mui/material/Box";
 import { Zoom } from '@mui/material';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import LogoutIcon from '@mui/icons-material/Logout';
-import { useNavigate } from "react-router-dom";
-
-
-
 
 const LoginButton = ({ loggedIn }) => {
-    const navigate = useNavigate();
 
-    const navigateToHome = () => {
-        navigate(loggedIn ? "/" : '/login');
-    };
     const handleClick = () => {
         loggedIn ? localStorage.setItem("userAuth", null) : undefined;
     }
 
-    return <Box onClick={navigateToHome}>
+    return <Link href={loggedIn ? "/" : "/login"} >
         <Tooltip TransitionComponent={Zoom} title={loggedIn ? "Log Out" : "Go to your account"} >
             <IconButton aria-label="login" size="large" color="icon" onClick={handleClick} >
                 {loggedIn ?
@@ -29,7 +21,7 @@ const LoginButton = ({ loggedIn }) => {
                     <AccountCircleIcon sx={{ width: "2em", height: "2em" }} />}
             </IconButton>
         </Tooltip>
-    </Box>
+    </Link>
 }
 
 export default LoginButton
