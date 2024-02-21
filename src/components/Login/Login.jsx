@@ -57,6 +57,14 @@ const Login = () => {
     }
   }, []);
 
+  const handleSendToSignUp = () => {
+    navigate("/sign-up");
+  }
+
+  const handleSendToHome = () => {
+    navigate("/");
+  }
+
   const handleSend = async () => {
     const response = await post("/login", { username, password });
     if (response.error) {
@@ -134,16 +142,12 @@ const Login = () => {
                 </Button>
                 <Grid container >
                   <Grid item display='flex' justifyContent='space-between' sx={{ width: '100%' }} >
-                    <Link href="/sign-up" variant="body2">
-                      {"Don't have an account? Sign Up"}
-                    </Link>
-                    <Link href="/" variant="body2" underline="none">
-                      {"Home"}
-                    </Link>
+                    <Typography onClick={handleSendToSignUp} variant='body2' sx={{ textDecoration: 'line-through', color: '#000', cursor: 'pointer' }}>Don't have an account? Sign Up</Typography>
+                    <Typography onClick={handleSendToHome} variant='body2' sx={{ color: '#000', cursor: 'pointer' }}>Home</Typography>
                   </Grid>
                 </Grid>
                 <Collapse in={openAlert}>
-                  <Alert action={<IconButton onClick={() => {setOpenAlert(false)}}><CloseIcon></CloseIcon></IconButton>} severity="warning">
+                  <Alert action={<IconButton onClick={() => { setOpenAlert(false) }}><CloseIcon></CloseIcon></IconButton>} severity="warning">
                     <AlertTitle>Warning</AlertTitle>
                     Wrong Username and/or Password
                   </Alert>
