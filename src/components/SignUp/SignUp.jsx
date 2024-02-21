@@ -3,7 +3,6 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import Link from '@mui/material/Link';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
@@ -69,6 +68,14 @@ const SignUp = () => {
     }
   };
 
+  const handleSendToLogin = () => {
+    navigate("/login");
+  }
+
+  const handleSendToHome = () => {
+    navigate("/");
+  }
+
   return (
     <ThemeProvider theme={theme}>
       <Box
@@ -133,12 +140,8 @@ const SignUp = () => {
                 </Button>
                 <Grid container >
                   <Grid item display='flex' justifyContent='space-between' sx={{ width: '100%' }} >
-                    <Link href="/login" variant="body2">
-                      {"Already have an account? Sign in"}
-                    </Link>
-                    <Link href="/" variant="body2" underline="none">
-                      {"Home"}
-                    </Link>
+                    <Typography onClick={handleSendToLogin} variant='body2' sx={{ textDecoration: 'underline', color: '#000', cursor: 'pointer' }}>Already have an account? Log in</Typography>
+                    <Typography onClick={handleSendToHome} variant='body2' sx={{ color: '#000', cursor: 'pointer' }}>Home</Typography>
                   </Grid>
                 </Grid>
                 <Collapse in={openAlert}>
