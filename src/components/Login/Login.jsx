@@ -142,7 +142,7 @@ const Login = () => {
                 </Button>
                 <Grid container >
                   <Grid item display='flex' justifyContent='space-between' sx={{ width: '100%' }} >
-                    <Typography onClick={handleSendToSignUp} variant='body2' sx={{ textDecoration: 'line-through', color: '#000', cursor: 'pointer' }}>Don't have an account? Sign Up</Typography>
+                    <Typography onClick={handleSendToSignUp} variant='body2' sx={{ textDecoration: 'underline', color: '#000', cursor: 'pointer' }}>Don't have an account? Sign Up</Typography>
                     <Typography onClick={handleSendToHome} variant='body2' sx={{ color: '#000', cursor: 'pointer' }}>Home</Typography>
                   </Grid>
                 </Grid>
