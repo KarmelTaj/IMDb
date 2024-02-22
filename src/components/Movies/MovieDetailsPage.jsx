@@ -75,7 +75,7 @@ const MovieDetailsPage = () => {
             setCanRate(false);
             navigate(`/movies/${movieID}`);
             // Reload the page after navigation
-            navigate(0);
+            //navigate(0);
         } else {
             setCanRate(false);
             navigate(`/movies/${movieID}`);
