@@ -35,7 +35,8 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/movies/:movieID/rate-movie",
-        errorElement: <ErrorPage />
+        errorElement: <ErrorPage />,
+        element: <></>
       },
     ],
   },
