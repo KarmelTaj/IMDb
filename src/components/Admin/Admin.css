@@ -1,7 +1,21 @@
-.css-rz6f6f-MuiButtonBase-root-MuiTab-root.Mui-selected{
+/* for localhost */
+.css-rz6f6f-MuiButtonBase-root-MuiTab-root.Mui-selected {
     color: #f5c518 !important;
 }
+
 .css-rz6f6f-MuiButtonBase-root-MuiTab-root {
+    color: #fff !important;
+    font-size: 1rem !important;
+    font-weight: 600 !important;
+    line-height: 2.5 !important;
+}
+
+/* for server */
+.css-bcjpj5.Mui-selected {
+    color: #f5c518 !important;
+}
+
+.css-bcjpj5 {
     color: #fff !important;
     font-size: 1rem !important;
     font-weight: 600 !important;
