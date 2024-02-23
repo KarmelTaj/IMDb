@@ -5,6 +5,7 @@ import Toolbar from '@mui/material/Toolbar';
 import { Typography } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import LoginButton from './Login-button';
+import LogoutButton from './Logout-button';
 import AdminButton from './Admin-button';
 import { useNavigate } from 'react-router-dom';
 
@@ -47,6 +48,13 @@ const Header = () => {
         navigate("/");
     }
 
+    const handleLogout = () => {
+        console.log('removing userAuth')
+        localStorage.removeItem("userAuth");
+        setLoggedIn(false);
+        
+    }
+
     return (
         <ThemeProvider theme={theme}>
             <Box sx={{ flexGrow: 1, height: '10vh', width: '100%', position: 'absolute', top: 0 }}>
@@ -55,7 +63,7 @@ const Header = () => {
                         <Typography onClick={handleSendToHome} variant='h5' sx={{ cursor: 'pointer', fontWeight: 800, bgcolor: 'secondary.main', color: 'secondary.contrastText', borderRadius: '4px', px: 0.6, py: 0.2 }}>IMDb</Typography>
                         <Box sx={{ position: 'absolute', right: '8px' }}>
                             {isAdmin && <AdminButton />}
-                            <LoginButton loggedIn={loggedIn} />
+                            {loggedIn ? <LogoutButton handleLogout={handleLogout} /> : <LoginButton /> }
                         </Box>
                     </Toolbar>
                 </AppBar>
