@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useLoaderData, useNavigate } from "react-router-dom";
-import { getID, post } from "../../utils/httpClient";
+import { get, post } from "../../utils/httpClient";
 import { Box, Typography, Button, Dialog, DialogTitle, DialogContent, DialogActions, Rating, IconButton, Fab } from "@mui/material";
 import StarOutlineIcon from '@mui/icons-material/StarOutline';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
@@ -35,9 +35,15 @@ const MovieDetailsPage = () => {
     const [canRate, setCanRate] = useState(false);
     const [userRating, setUserRating] = useState(0);
     const [openAlert, setOpenAlert] = useState(false);
+    const [theMovie, setTheMovie] = useState(movie);
 
     // Check if movie is an array and get the first element
-    const theMovie = Array.isArray(movie) ? movie[0] : movie;
+    //onst theMovie = Array.isArray(movie) ? movie[0] : movie;
+
+    const fetchMovieDetails = async (movieID) => {
+        const movieDetails = await get(`/movies/${movieID}`);
+        setTheMovie(movieDetails);
+    };
 
     const handleRatingDialogClose = () => {
         setCanRate(false);
@@ -70,6 +76,7 @@ const MovieDetailsPage = () => {
         if (response.success) {
             const delay = ms => new Promise(res => setTimeout(res, ms));
             setOpenAlert(true);
+            fetchMovieDetails(movieID);
             await delay(3000);
             setOpenAlert(false);
             setCanRate(false);
@@ -171,6 +178,6 @@ export default MovieDetailsPage
 
 
 export async function loader({ params }) {
-    const movie = await getID(`/movies/${params.movieID}`);
+    const movie = await get(`/movies/${params.movieID}`);
     return { movie };
 }

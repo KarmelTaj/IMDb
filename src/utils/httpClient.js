@@ -36,20 +36,20 @@ export async function get(path) {
     return data
 }
 
-export async function getID(path) {
-    var requestOptions = {
-        method: 'GET',
-        redirect: 'follow'
-    };
+// export async function getID(path) {
+//     var requestOptions = {
+//         method: 'GET',
+//         redirect: 'follow'
+//     };
 
-    try {
-        const response = await fetch(`${BASE_URL}${path}`, requestOptions);
-        const data = await response.json();
-        return data;
-    } catch (error) {
-        console.log('error', error);
-    }
-}
+//     try {
+//         const response = await fetch(`${BASE_URL}${path}`, requestOptions);
+//         const data = await response.json();
+//         return data;
+//     } catch (error) {
+//         console.log('error', error);
+//     }
+// }
 
 
 export async function DELETE(path, body) {
