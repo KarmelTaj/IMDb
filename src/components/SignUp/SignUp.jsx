@@ -8,12 +8,13 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
-import { createTheme, ThemeProvider, styled } from '@mui/material/styles';
+import { ThemeProvider, styled } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { Collapse, IconButton, Alert, AlertTitle } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import { post } from '../../utils/httpClient';
+import { signUp as theme } from '../../utils/theme';
 
 const DarkendBackground = styled('div')(({ theme }) => ({
   position: 'absolute',
@@ -29,18 +30,6 @@ const DarkendBackground = styled('div')(({ theme }) => ({
   zIndex: -1,
 }));
 
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: '#121212',
-      contrastText: '#fff',
-    },
-    secondary: {
-      main: '#f5c518',
-      contrastText: '#000',
-    },
-  },
-});
 
 const SignUp = () => {
 

@@ -3,29 +3,12 @@ import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import { Typography } from '@mui/material';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { ThemeProvider } from '@mui/material/styles';
 import LoginButton from './Login-button';
 import LogoutButton from './Logout-button';
 import AdminButton from './Admin-button';
 import { useNavigate } from 'react-router-dom';
-
-const theme = createTheme({
-    spacing: 8,
-    palette: {
-        primary: {
-            main: '#121212',
-            contrastText: '#fff',
-        },
-        secondary: {
-            main: '#f5c518',
-            contrastText: '#000',
-        },
-        icon: {
-            main: '#5799ef',
-            contrastText: '#1f1f1f',
-        }
-    },
-});
+import { headerHeader as theme } from '../../utils/theme';
 
 const Header = () => {
 

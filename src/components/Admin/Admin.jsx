@@ -8,9 +8,10 @@ import HomeIcon from '@mui/icons-material/Home';
 import AddMovie from './Add-Movie';
 import AddStar from './Add-Star';
 import DeleteMovie from './Delete-Movie';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { ThemeProvider } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
 import './Admin.css'
+import { adminAdmin as theme } from '../../utils/theme';
 
 
 function TabPanel(props) {
@@ -46,26 +47,6 @@ function a11yProps(index) {
         'aria-controls': `vertical-tabpanel-${index}`,
     };
 }
-
-const theme = createTheme({
-    palette: {
-        primary: {
-            main: '#f5c518',
-            light: '#f7d046',
-            dark: '#ab8910',
-            contrastText: '#000',
-        },
-        secondary: {
-            main: '#121212',
-            contrastText: '#fff',
-        },
-        backgrounds: {
-            tab: '#1f1f1f',
-            contrastText: '#000',
-            panel: '#fff',
-        }
-    },
-});
 
 const Admin = () => {
     const [value, setValue] = useState(0);

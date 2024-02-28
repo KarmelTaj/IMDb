@@ -9,11 +9,12 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
-import { createTheme, ThemeProvider, styled } from '@mui/material/styles';
+import { ThemeProvider, styled } from '@mui/material/styles';
 import { post } from '../../utils/httpClient'
 import { useNavigate } from 'react-router-dom';
 import { Collapse, IconButton, Alert, AlertTitle } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
+import { login as theme } from '../../utils/theme';
 
 const DarkendBackground = styled('div')(({ theme }) => ({
   position: 'absolute',
@@ -28,19 +29,6 @@ const DarkendBackground = styled('div')(({ theme }) => ({
   backgroundPosition: '50% 50%',
   zIndex: -1,
 }));
-
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: '#121212',
-      contrastText: '#fff',
-    },
-    secondary: {
-      main: '#f5c518',
-      contrastText: '#000',
-    },
-  },
-});
 
 const Login = () => {
 

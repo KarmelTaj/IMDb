@@ -1,27 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Box, Grid, Paper, Typography, Button, Select, MenuItem, FormControl, InputLabel } from "@mui/material";
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { ThemeProvider } from '@mui/material/styles';
 import { get, DELETE } from "../../utils/httpClient";
 import { Collapse, Alert, AlertTitle } from '@mui/material';
-
-
-const theme = createTheme({
-    palette: {
-        primary: {
-            main: '#f5c518',
-            contrastText: '#000',
-        },
-        secondary: {
-            main: '#000',
-            contrastText: '#fff',
-        },
-        backgrounds: {
-            tab: '#1f1f1f',
-            contrastText: '#000',
-            panel: '#fff',
-        }
-    },
-});
+import { adminDeleteMovie as theme } from "../../utils/theme";
 
 const DeleteMovie = () => {
     const [selectedMovie, setSelectedMovie] = useState("");

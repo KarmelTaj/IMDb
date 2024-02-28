@@ -1,17 +1,8 @@
 import React from "react";
 import { Box, Typography } from "@mui/material";
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { ThemeProvider } from '@mui/material/styles';
 import MovieList from "./MovieList";
-
-const theme = createTheme({
-    spacing: 8,
-    palette: {
-        primary: {
-            main: '#f5c518',
-            contrastText: '#000',
-        },
-    },
-});
+import { homeMainHome as theme } from "../../utils/theme";
 
 const MainHome = () => {
     return (

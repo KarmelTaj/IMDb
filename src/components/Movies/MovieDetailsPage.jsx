@@ -3,30 +3,11 @@ import { useLoaderData, useNavigate } from "react-router-dom";
 import { get, post } from "../../utils/httpClient";
 import { Box, Typography, Button, Rating, Fab } from "@mui/material";
 import StarOutlineIcon from '@mui/icons-material/StarOutline';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { ThemeProvider } from '@mui/material/styles';
 import './MovieDetailsPage.css'
 import HomeIcon from '@mui/icons-material/Home';
 import Rate from './Rate';
-
-
-const theme = createTheme({
-    palette: {
-        primary: {
-            main: '#121212',
-            contrastText: '#fff',
-        },
-        secondary: {
-            main: '#f5c518',
-            contrastText: '#000',
-        },
-        rate: {
-            main: '#1f1f1f',
-            light: '#4b4b4b',
-            dark: '#151515',
-            contrastText: '#5799ef',
-        }
-    },
-});
+import { moviesMovieDetailsPage as theme } from "../../utils/theme";
 
 const MovieDetailsPage = () => {
     const { movie } = useLoaderData();

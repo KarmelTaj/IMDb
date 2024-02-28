@@ -1,26 +1,9 @@
 import React, { useState } from "react";
 import { Box, Grid, Paper, Typography, TextField, Button } from "@mui/material";
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { ThemeProvider } from '@mui/material/styles';
 import { post } from "../../utils/httpClient";
 import { Collapse, Alert, AlertTitle } from '@mui/material';
-
-const theme = createTheme({
-    palette: {
-        primary: {
-            main: '#f5c518',
-            contrastText: '#000',
-        },
-        secondary: {
-            main: '#000',
-            contrastText: '#fff',
-        },
-        backgrounds: {
-            tab: '#1f1f1f',
-            contrastText: '#000',
-            panel: '#fff',
-        }
-    },
-});
+import { adminAddStar as theme } from "../../utils/theme";
 
 const AddStar = () => {
 
