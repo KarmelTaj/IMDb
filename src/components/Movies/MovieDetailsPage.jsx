@@ -1,13 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useLoaderData, useNavigate } from "react-router-dom";
 import { get, post } from "../../utils/httpClient";
-import { Box, Typography, Button, Dialog, DialogTitle, DialogContent, DialogActions, Rating, IconButton, Fab } from "@mui/material";
+import { Box, Typography, Button, Rating, Fab } from "@mui/material";
 import StarOutlineIcon from '@mui/icons-material/StarOutline';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import './MovieDetailsPage.css'
-import CloseIcon from '@mui/icons-material/Close';
 import HomeIcon from '@mui/icons-material/Home';
-import { Collapse, Alert, AlertTitle } from '@mui/material';
 import Rate from './Rate';
 
 
