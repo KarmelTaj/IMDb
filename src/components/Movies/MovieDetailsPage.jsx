@@ -8,6 +8,7 @@ import './MovieDetailsPage.css'
 import CloseIcon from '@mui/icons-material/Close';
 import HomeIcon from '@mui/icons-material/Home';
 import { Collapse, Alert, AlertTitle } from '@mui/material';
+import Rate from './Rate';
 
 
 const theme = createTheme({
@@ -99,7 +100,7 @@ const MovieDetailsPage = () => {
                 <Fab variant="circular" color="rate" size="large" onClick={navigateToHome} sx={{ position: "absolute", top: '40px', left: '60px', width: '72px', height: '72px' }}>
                     <HomeIcon sx={{ height: '35px', width: '35px' }} />
                 </Fab>
-                <Dialog fullWidth={true} maxWidth={'sm'} open={canRate} onClose={handleRatingDialogClose}>
+                {/* <Dialog fullWidth={true} maxWidth={'sm'} open={canRate} onClose={handleRatingDialogClose}>
                     <DialogTitle align="center" sx={{ color: 'secondary.main', fontWeight: '600' }}>
                         Rate This <span className="rate-movie-title">{theMovie.title}</span>
                         <IconButton
@@ -124,8 +125,17 @@ const MovieDetailsPage = () => {
                             You Rated {userRating} for {theMovie.title}
                         </Alert>
                     </Collapse>
-                </Dialog>
-
+                </Dialog> */}
+                <Rate
+                    movie={movie}
+                    canRate={canRate}
+                    handleRatingDialogClose={handleRatingDialogClose}
+                    handleRate={handleRate}
+                    handleRatingSubmit={handleRatingSubmit}
+                    userRating={userRating}
+                    setUserRating={setUserRating}
+                    openAlert={openAlert}
+                />
 
                 <Box sx={{ position: 'absolute', bottom: '40px', right: '80px' }}>
                     <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', gap: '8px' }}>
