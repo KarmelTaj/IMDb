@@ -1,9 +1,20 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Button, Dialog, DialogTitle, DialogContent, DialogActions, Rating, IconButton } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
 import { Collapse, Alert, AlertTitle } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 const Rate = ({ movie, canRate, handleRatingDialogClose, handleRatingSubmit, userRating, setUserRating, openAlert }) => {
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const userAuth = JSON.parse(localStorage.getItem("userAuth"));
+        if (userAuth === null || !userAuth.id) {
+            navigate(`/movies/${movie.id}`);
+        }
+      }, []);
+
+
     return (
         <Dialog fullWidth={true} maxWidth={'sm'} open={canRate} onClose={handleRatingDialogClose}>
             <DialogTitle align="center" sx={{ color: 'secondary.main', fontWeight: '600' }}>

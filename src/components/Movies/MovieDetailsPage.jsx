@@ -61,8 +61,6 @@ const MovieDetailsPage = () => {
             setOpenAlert(false);
             setCanRate(false);
             navigate(`/movies/${movieID}`);
-            // Reload the page after navigation
-            //navigate(0);
         } else {
             setCanRate(false);
             navigate(`/movies/${movieID}`);
@@ -79,32 +77,6 @@ const MovieDetailsPage = () => {
                 <Fab variant="circular" color="rate" size="large" onClick={navigateToHome} sx={{ position: "absolute", top: '40px', left: '60px', width: '72px', height: '72px' }}>
                     <HomeIcon sx={{ height: '35px', width: '35px' }} />
                 </Fab>
-                {/* <Dialog fullWidth={true} maxWidth={'sm'} open={canRate} onClose={handleRatingDialogClose}>
-                    <DialogTitle align="center" sx={{ color: 'secondary.main', fontWeight: '600' }}>
-                        Rate This <span className="rate-movie-title">{theMovie.title}</span>
-                        <IconButton
-                            edge="end"
-                            onClick={handleRatingDialogClose}
-                            sx={{ position: 'absolute', top: '16px', right: '32px' }}
-                        >
-                            <CloseIcon sx={{ color: '#fff' }} />
-                        </IconButton>
-                    </DialogTitle>
-                    <DialogContent>
-                        <Rating name="user-rating" value={userRating} size="large" onChange={(event, newValue) => setUserRating(newValue)} />
-                    </DialogContent>
-                    <DialogActions sx={{ width: '80%', display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
-                        <Button disabled={userRating === 0} onClick={handleRatingSubmit} className="submit-rate">
-                            Rate
-                        </Button>
-                    </DialogActions>
-                    <Collapse in={openAlert}>
-                        <Alert severity="success">
-                            <AlertTitle>success</AlertTitle>
-                            You Rated {userRating} for {theMovie.title}
-                        </Alert>
-                    </Collapse>
-                </Dialog> */}
                 <Rate
                     movie={movie}
                     canRate={canRate}

@@ -11,6 +11,7 @@ import Admin from './components/Admin/Admin.jsx';
 import AddStar from './components/Admin/Add-Star.jsx';
 import AddMovie from './components/Admin/Add-Movie.jsx';
 import DeleteMovie from './components/Admin/Delete-Movie.jsx';
+import Rate from './components/Movies/Rate.jsx';
 
 
 const router = createBrowserRouter([
@@ -36,7 +37,7 @@ const router = createBrowserRouter([
       {
         path: "/movies/:movieID/rate-movie",
         errorElement: <ErrorPage />,
-        element: <></>
+        element: <Rate />
       },
     ],
   },
